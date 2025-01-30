@@ -38,7 +38,7 @@ public class GameLogic {
 
         if (!isValidNumber(userAnswer)) {
             System.out.println("Your final score: " + score);
-            leave();
+            Menu.menu();
             return;
         }
 
@@ -113,7 +113,8 @@ public class GameLogic {
                 3. Include only [2, 3, 4, 5, 6, 7, 8, 9]
                 4. Include all [1 to 10]
                 5. Check current preset
-                6. Return menu
+                6. Create custom preset
+                7. Return menu
                 """);
 
         System.out.print("Type your option here: ");
@@ -144,6 +145,10 @@ public class GameLogic {
                 checkCurrentPreset();
                 return;
             }
+            case "6" -> {
+                createCustomPreset();
+                return;
+            }
             default -> {
                 Menu.menu();
                 return;
@@ -155,6 +160,58 @@ public class GameLogic {
 
     private static void checkCurrentPreset() {
         System.out.printf("Current preset: %s%n", table);
+    }
+
+    public static void createCustomPreset() {
+        System.out.println("""
+            =============================================================
+                                    Custom Preset
+            =============================================================
+            Type the numbers you want to include in your preset (1 to 10),
+            separated by spaces (ex: '1 2 6 10' or '4 9' or '5'):
+            Type 'done' when you finish.
+            """);
+
+        String userInput;
+        Set<Integer> customPreset = new HashSet<>();
+        boolean isValidInput = true;
+
+        while (true) {
+            System.out.print("Enter numbers or 'done' to finish: ");
+            userInput = scanner.nextLine().trim();
+
+            if (userInput.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            String[] userNumbers = userInput.split("\\s+");
+
+            for (String userNumber : userNumbers) {
+                try {
+                    int number = Integer.parseInt(userNumber.trim());
+                    if (number < 1 || number > 10) {
+                        System.out.println("Number must be between 1 and 10. Please try again.");
+                        isValidInput = false;
+                        break;
+                    }
+                    customPreset.add(number);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input, please enter only numbers separated by spaces.");
+                    isValidInput = false;
+                    break;
+                }
+            }
+
+            if (!isValidInput) {
+                customPreset.clear();
+                continue;
+            }
+        }
+
+        table.clear();
+        table.addAll(customPreset);
+
+        System.out.printf("Custom preset applied. Updated table: %s%n", table);
     }
 
     private enum Operation {
