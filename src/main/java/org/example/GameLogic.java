@@ -22,6 +22,12 @@ public class GameLogic {
     }
 
     public static void play() {
+        if (table.isEmpty()) {
+            System.out.println("Please select or create a preset");
+            presets();
+            return;
+        }
+
         int num1 = chooseRandom(table);
         int num2 = chooseRandom(table);
 
@@ -52,8 +58,7 @@ public class GameLogic {
             1. Add numbers in multiplication table
             2. Remove numbers in multiplication table
             3. Presets
-            4. Check current preset
-            5. Return menu
+            4. Return menu
             """);
         System.out.print("Type your option here: ");
         String option = scanner.nextLine();
@@ -62,7 +67,6 @@ public class GameLogic {
             case "1" -> changeTable(Operation.ADD);
             case "2" -> changeTable(Operation.REMOVE);
             case "3" -> presets();
-            case "4" -> checkCurrentPreset();
             default -> Menu.menu();
         }
     }
@@ -108,7 +112,8 @@ public class GameLogic {
                 2. Include [3, 4, 6, 7, 8, 9]
                 3. Include [2, 3, 4, 5, 6, 7, 8, 9]
                 4. Include all [1 to 10]
-                5. Return menu
+                5. Check current preset
+                6. Return menu
                 """);
 
         System.out.print("Type your option here: ");
@@ -134,6 +139,10 @@ public class GameLogic {
                 table.clear();
                 table.addAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
                 System.out.println("Preset 4 applied.");
+            }
+            case "5" -> {
+                checkCurrentPreset();
+                return;
             }
             default -> {
                 Menu.menu();
