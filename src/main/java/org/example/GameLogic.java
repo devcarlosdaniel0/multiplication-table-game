@@ -103,7 +103,7 @@ public class GameLogic {
         returnToMenuChangeTable(operation);
     }
 
-    public static void presets() {
+    private static void presets() {
         System.out.println("""
                 ===================================
                               Presets
@@ -162,7 +162,7 @@ public class GameLogic {
         System.out.printf("Current preset: %s%n", table);
     }
 
-    public static void createCustomPreset() {
+    private static void createCustomPreset() {
         System.out.println("""
             =============================================================
                                     Custom Preset
