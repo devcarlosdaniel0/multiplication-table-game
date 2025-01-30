@@ -55,18 +55,18 @@ public class GameLogic {
             =========================================
                             Configure
             =========================================
-            1. Add numbers in multiplication table
-            2. Remove numbers in multiplication table
-            3. Presets
+            1. Presets
+            2. Add numbers in multiplication table
+            3. Remove numbers in multiplication table
             4. Return menu
             """);
         System.out.print("Type your option here: ");
         String option = scanner.nextLine();
 
         switch (option) {
-            case "1" -> changeTable(Operation.ADD);
-            case "2" -> changeTable(Operation.REMOVE);
-            case "3" -> presets();
+            case "1" -> presets();
+            case "2" -> changeTable(Operation.ADD);
+            case "3" -> changeTable(Operation.REMOVE);
             default -> Menu.menu();
         }
     }
@@ -78,14 +78,14 @@ public class GameLogic {
 
         System.out.printf("The current multiplication table is: %s%n%n", table);
         System.out.printf("Type here the number you want to %s (1 to 10) or any letter to return menu: ", message);
-        String userNumber = scanner.nextLine();
+        String userInput = scanner.nextLine();
 
-        if (!isValidNumber(userNumber)) {
+        if (!isValidNumber(userInput)) {
             Menu.menu();
             return;
         }
 
-        int number = Integer.parseInt(userNumber);
+        int number = Integer.parseInt(userInput);
 
         if (number < 1 || number > 10) {
             System.out.println("Number must be between 1 and 10");
@@ -108,9 +108,9 @@ public class GameLogic {
                 ===================================
                               Presets
                 ===================================
-                1. Include [6, 7, 8, 9]
-                2. Include [3, 4, 6, 7, 8, 9]
-                3. Include [2, 3, 4, 5, 6, 7, 8, 9]
+                1. Include only [6, 7, 8, 9]
+                2. Include only [3, 4, 6, 7, 8, 9]
+                3. Include only [2, 3, 4, 5, 6, 7, 8, 9]
                 4. Include all [1 to 10]
                 5. Check current preset
                 6. Return menu
