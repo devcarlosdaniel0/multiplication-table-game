@@ -7,11 +7,12 @@ public class Menu {
 
     public static void menu() {
         System.out.println("""
+        =======================================================================
         Welcome to Command Line Interface game to memorize multiplication table
-        -----------------------------------------------------------------------
+        =======================================================================
         1. Play
         2. Configure game
-        3. Leave
+        3. Leave (You can also use any letter)
         """);
         System.out.print("Type your option here: ");
 
