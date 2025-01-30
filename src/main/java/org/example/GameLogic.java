@@ -5,7 +5,7 @@ import java.util.*;
 public class GameLogic {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Random random = new Random();
-    private static final Set<Integer> table = new HashSet<>(List.of(2, 3, 4, 5, 9));
+    private static final Set<Integer> table = new HashSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
     private static boolean playing = true;
     private static int score;
 
@@ -27,14 +27,12 @@ public class GameLogic {
 
         int correctAnswer = num1 * num2;
 
-        System.out.print(num1 + " * " + num2 + "? ");
+        System.out.printf("%d * %d ? ", num1, num2);
         String userAnswer = scanner.nextLine();
 
-        try {
-            Integer.parseInt(userAnswer);
-        } catch (NumberFormatException e) {
-            leave();
+        if (!isValidNumber(userAnswer)) {
             System.out.println("Your final score: " + score);
+            leave();
             return;
         }
 
@@ -47,61 +45,95 @@ public class GameLogic {
     }
 
     public static void configure() {
-        System.out.println("1. Add numbers in multiplication table");
-        System.out.println("2. Remove numbers in multiplication table");
-        System.out.println("3. Back menu");
+        System.out.println("""
+            1. Add numbers in multiplication table
+            2. Remove numbers in multiplication table
+            3. Return menu
+            """);
         System.out.print("Type your option here: ");
         String option = scanner.nextLine();
 
         switch (option) {
-            case "1" -> addNumbersInMultiplicationTable();
-            case "2" -> removeNumbersInMultiplicationTable();
-            default -> {
-                Menu.menu();
-            }
+            case "1" -> changeTable(Operation.ADD);
+            case "2" -> changeTable(Operation.REMOVE);
+            default -> Menu.menu();
         }
     }
 
-    public static void addNumbersInMultiplicationTable() {
-        System.out.println("The actual mult. table is: " + table);
-        System.out.print("Type here the number you want to add: ");
+    private static void changeTable(Operation operation) {
+        boolean isEqualsAdd = operation.equals(Operation.ADD);
+
+        String message = operation.getMessage();
+
+        System.out.printf("The current multiplication table is: %s%n%n", table);
+        System.out.printf("Type here the number you want to %s (1 to 10) or any letter to return menu: ", message);
         String userNumber = scanner.nextLine();
 
-        try {
-            Integer.parseInt(userNumber);
-        } catch (NumberFormatException e) {
+        if (!isValidNumber(userNumber)) {
             Menu.menu();
             return;
         }
 
         int number = Integer.parseInt(userNumber);
 
-        if (number > 10 || number <= 0 || table.contains(number)) {
-            System.out.println("You can't add number " + number);
-        } else {
-            table.add(number);
-            System.out.println("Actual table now: " + table);
-            System.out.print("Back to menu? Y/N ");
-            String userAnswer = scanner.nextLine();
+        if (number < 1 || number > 10) {
+            System.out.println("Number must be between 1 and 10");
+            returnToMenuChangeTable(operation);
+            return;
+        }
 
-            if (userAnswer.equalsIgnoreCase("y")) {
-                Menu.menu();
-            } else {
-                addNumbersInMultiplicationTable();
-            }
+        if (isEqualsAdd ? table.add(number) : table.remove(number)) {
+            System.out.printf("Number '%d' successfully %s.%n", number, message);
+        } else {
+            System.out.printf("You can't %s number '%d'. It is %s in the table.%n",
+                    message, number, isEqualsAdd ? "already present" : "absent");
+        }
+
+        returnToMenuChangeTable(operation);
+    }
+
+    private enum Operation {
+        ADD("add"),
+        REMOVE("remove");
+
+        private final String message;
+
+        Operation(String message) {
+            this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 
-    public static void removeNumbersInMultiplicationTable() {
+    private static void returnToMenuChangeTable(Operation operation) {
+        System.out.printf("Updated table: %s%n%n", table);
+        System.out.print("Return to menu? (Y/N) ");
+        String userAnswer = scanner.nextLine().trim();
 
+        if (userAnswer.equalsIgnoreCase("y")) {
+            Menu.menu();
+        } else {
+            changeTable(operation);
+        }
+    }
+
+    private static boolean isValidNumber(String userInput) {
+        try {
+            Integer.parseInt(userInput);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     public static void leave() {
         playing = false;
     }
 
-    public static int chooseRandom(Set<Integer> tables) {
-        List<Integer> tableList = new ArrayList<>(tables);
+    private static int chooseRandom(Set<Integer> table) {
+        List<Integer> tableList = new ArrayList<>(table);
         return tableList.get(random.nextInt(tableList.size()));
     }
 }
