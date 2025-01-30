@@ -63,6 +63,32 @@ public class GameLogic {
     }
 
     public static void addNumbersInMultiplicationTable() {
+        System.out.println("The actual mult. table is: " + table);
+        System.out.print("Type here the number you want to add: ");
+        String userNumber = scanner.nextLine();
+
+        try {
+            Integer.parseInt(userNumber);
+        } catch (NumberFormatException e) {
+            Menu.menu();
+            return;
+        }
+
+        int number = Integer.parseInt(userNumber);
+
+        if (number > 10 || number <= 0 || table.contains(number)) {
+            System.out.println("You can't add number " + number);
+        } else {
+            table.add(number);
+            System.out.println("Actual table now: " + table);
+            System.out.print("Back to menu? Y/N ");
+            String userAnswer = scanner.nextLine();
+
+            if (userAnswer.equalsIgnoreCase("y")) {
+                Menu.menu();
+            } else {
+                addNumbersInMultiplicationTable();
+            }
         }
     }
 
