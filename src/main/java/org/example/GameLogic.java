@@ -47,8 +47,28 @@ public class GameLogic {
     }
 
     public static void configure() {
+        System.out.println("1. Add numbers in multiplication table");
+        System.out.println("2. Remove numbers in multiplication table");
+        System.out.println("3. Back menu");
+        System.out.print("Type your option here: ");
+        String option = scanner.nextLine();
+
+        switch (option) {
+            case "1" -> addNumbersInMultiplicationTable();
+            case "2" -> removeNumbersInMultiplicationTable();
+            default -> {
+                Menu.menu();
+            }
+        }
     }
 
+    public static void addNumbersInMultiplicationTable() {
+        }
+    }
+
+    public static void removeNumbersInMultiplicationTable() {
+
+    }
 
     public static void leave() {
         playing = false;
