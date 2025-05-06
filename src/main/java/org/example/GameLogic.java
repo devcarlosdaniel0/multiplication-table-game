@@ -37,7 +37,7 @@ public class GameLogic {
 
     public static void play() {
         if (table.isEmpty()) {
-            System.out.println("Please select or create a preset");
+            System.out.println("You cant play with an empty preset! Please select or create a preset");
             presets();
             return;
         }
@@ -76,8 +76,8 @@ public class GameLogic {
                             Configure
             =========================================
             1. Presets
-            2. Add numbers in multiplication table
-            3. Remove numbers in multiplication table
+            2. Add number in multiplication table (one at time)
+            3. Remove number in multiplication table (one at time)
             4. Toggle "Answer until correct" (Currently: %s)
             5. Return menu
             """.formatted(forceUntilCorrect ? "TRUE" : "FALSE"));
@@ -200,13 +200,11 @@ public class GameLogic {
             Type 'done' when you finish.
             """);
 
-        String userInput;
         Set<Integer> customPreset = new HashSet<>();
-        boolean isValidInput = true;
 
         while (true) {
             System.out.print("Enter numbers or 'done' to finish: ");
-            userInput = scanner.nextLine().trim();
+            String userInput = scanner.nextLine().trim();
 
             if (userInput.equalsIgnoreCase("done")) {
                 break;
@@ -219,21 +217,19 @@ public class GameLogic {
                     int number = Integer.parseInt(userNumber.trim());
                     if (number < 1 || number > 10) {
                         System.out.println("Number must be between 1 and 10. Please try again.");
-                        isValidInput = false;
                         break;
                     }
                     customPreset.add(number);
                 } catch (NumberFormatException e) {
                     System.out.println("Invalid input, please enter only numbers separated by spaces.");
-                    isValidInput = false;
                     break;
                 }
             }
+        }
 
-            if (!isValidInput) {
-                customPreset.clear();
-                continue;
-            }
+        if (customPreset.isEmpty()) {
+            System.out.println("No valid numbers entered. Previous preset was kept: " + table);
+            return;
         }
 
         table.clear();
