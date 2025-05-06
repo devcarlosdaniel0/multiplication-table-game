@@ -12,7 +12,9 @@ public class Menu {
         =======================================================================
         1. Play
         2. Configure game
-        3. Leave (You can also use any letter)
+        3. Check current score
+        4. Reset score
+        5. Leave (You can also type any letter)
         """);
         System.out.print("Type your option here: ");
 

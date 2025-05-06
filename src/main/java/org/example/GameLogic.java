@@ -15,11 +15,24 @@ public class GameLogic {
             switch (option) {
                 case "1" -> play();
                 case "2" -> configure();
+                case "3" -> checkScore();
+                case "4" -> resetScore();
                 default -> {
                     leave();
                 }
             }
         }
+    }
+
+    private static void checkScore() {
+        System.out.println("Your current score is: " + score);
+        Menu.menu();
+    }
+
+    private static void resetScore() {
+        score = 0;
+        System.out.println("Your score is now set to: " + score);
+        Menu.menu();
     }
 
     public static void play() {
