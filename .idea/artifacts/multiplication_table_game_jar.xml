@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="multiplication-table-game:jar">
+    <output-path>$USER_HOME$/Downloads</output-path>
+    <root id="archive" name="multiplication-table-game.jar">
+      <element id="module-output" name="multiplication-table-game" />
+    </root>
+  </artifact>
+</component>

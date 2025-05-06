@@ -7,6 +7,7 @@ public class GameLogic {
     private static final Random random = new Random();
     private static final Set<Integer> table = new HashSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
     private static boolean playing = true;
+    private static boolean forceUntilCorrect = false;
     private static int score;
 
     public static void operateOption(String option) {
@@ -33,20 +34,26 @@ public class GameLogic {
 
         int correctAnswer = num1 * num2;
 
-        System.out.printf("%d * %d ? ", num1, num2);
-        String userAnswer = scanner.nextLine();
+        while (true) {
+            System.out.printf("%d * %d ? ", num1, num2);
+            String userAnswer = scanner.nextLine();
 
-        if (!isValidNumber(userAnswer)) {
-            System.out.println("Your final score: " + score);
-            Menu.menu();
-            return;
-        }
+            if (!isValidNumber(userAnswer)) {
+                System.out.println("Your final score: " + score);
+                Menu.menu();
+                return;
+            }
 
-        if (userAnswer.equals(String.valueOf(correctAnswer))) {
-            score++;
-            System.out.println("Correct!");
-        } else {
-            System.out.println("Wrong!");
+            if (userAnswer.equals(String.valueOf(correctAnswer))) {
+                score++;
+                System.out.println("Correct!");
+                break;
+            } else {
+                System.out.println("Wrong!");
+                if (!forceUntilCorrect) {
+                    break;
+                }
+            }
         }
     }
 
@@ -58,8 +65,9 @@ public class GameLogic {
             1. Presets
             2. Add numbers in multiplication table
             3. Remove numbers in multiplication table
-            4. Return menu
-            """);
+            4. Toggle "Answer until correct" (Currently: %s)
+            5. Return menu
+            """.formatted(forceUntilCorrect ? "TRUE" : "FALSE"));
         System.out.print("Type your option here: ");
         String option = scanner.nextLine();
 
@@ -67,8 +75,15 @@ public class GameLogic {
             case "1" -> presets();
             case "2" -> changeTable(Operation.ADD);
             case "3" -> changeTable(Operation.REMOVE);
+            case "4" -> toggleAnswerUntilCorrect();
             default -> Menu.menu();
         }
+    }
+
+    private static void toggleAnswerUntilCorrect() {
+        forceUntilCorrect = !forceUntilCorrect;
+        System.out.println("Answer Until Correct is now set to: " + (forceUntilCorrect ? "TRUE" : "FALSE"));
+        Menu.menu();
     }
 
     private static void changeTable(Operation operation) {
