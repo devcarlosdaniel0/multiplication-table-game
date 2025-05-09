@@ -37,7 +37,7 @@ public class GameLogic {
         Menu.menu();
     }
 
-    public static void play(String gameMode) {
+    private static void play(String gameMode) {
         if (table.isEmpty()) {
             System.out.println(bundle.getString("empty.warning"));
             presets();
@@ -78,7 +78,7 @@ public class GameLogic {
         }
     }
 
-    public static void configure() {
+    private static void configure() {
         System.out.println(bundle.getString("configure.text").formatted(forceUntilCorrect
                 ? bundle.getString("forceUntilCorrect.mode.on") : bundle.getString("forceUntilCorrect.mode.off")));
         System.out.print(bundle.getString("configure.prompt"));
@@ -249,7 +249,7 @@ public class GameLogic {
             this.message = message;
         }
 
-        public String getMessage() {
+        private String getMessage() {
             return message;
         }
     }
@@ -275,7 +275,7 @@ public class GameLogic {
         }
     }
 
-    public static void leave() {
+    private static void leave() {
         playing = false;
     }
 
