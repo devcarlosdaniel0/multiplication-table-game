@@ -10,11 +10,12 @@ public class GameLogic {
     private static boolean forceUntilCorrect = false;
     private static int score;
     private static final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
+    private static String gameMode = "*";
 
     public static void operateOption(String option) {
         while (playing) {
             switch (option) {
-                case "1" -> play();
+                case "1" -> play(gameMode);
                 case "2" -> configure();
                 case "3" -> checkScore();
                 case "4" -> resetScore();
@@ -36,7 +37,7 @@ public class GameLogic {
         Menu.menu();
     }
 
-    public static void play() {
+    public static void play(String gameMode) {
         if (table.isEmpty()) {
             System.out.println(bundle.getString("empty.warning"));
             presets();
@@ -46,10 +47,16 @@ public class GameLogic {
         int num1 = chooseRandom(table);
         int num2 = chooseRandom(table);
 
-        int correctAnswer = num1 * num2;
+        int correctAnswer;
+
+        if (gameMode.equals("*")) {
+            correctAnswer = num1 * num2;
+        } else {
+            correctAnswer = num1 + num2;
+        }
 
         while (true) {
-            System.out.printf("%d * %d ? ", num1, num2);
+            System.out.printf("%d %s %d ? ", num1, gameMode, num2);
             String userAnswer = scanner.nextLine();
 
             if (!isValidNumber(userAnswer)) {
@@ -82,6 +89,19 @@ public class GameLogic {
             case "2" -> changeTable(Operation.ADD);
             case "3" -> changeTable(Operation.REMOVE);
             case "4" -> toggleAnswerUntilCorrect();
+            case "5" -> changeGameMode();
+            default -> Menu.menu();
+        }
+    }
+
+    private static void changeGameMode() {
+        System.out.print(bundle.getString("change.game.mode.text"));
+
+        String option = scanner.nextLine();
+
+        switch (option) {
+            case "1" -> gameMode = "*";
+            case "2" -> gameMode = "+";
             default -> Menu.menu();
         }
     }
