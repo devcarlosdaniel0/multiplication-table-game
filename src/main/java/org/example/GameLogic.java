@@ -16,7 +16,7 @@ public class GameLogic {
         while (playing) {
             switch (option) {
                 case "1" -> play(gameMode);
-                case "2" -> configure();
+                case "2" -> generalSettings();
                 case "3" -> checkScore();
                 case "4" -> resetScore();
                 default -> {
@@ -24,17 +24,6 @@ public class GameLogic {
                 }
             }
         }
-    }
-
-    private static void checkScore() {
-        System.out.println(bundle.getString("current.score") + score);
-        Menu.menu();
-    }
-
-    private static void resetScore() {
-        score = 0;
-        System.out.println(bundle.getString("reset.score") + score);
-        Menu.menu();
     }
 
     private static void play(String gameMode) {
@@ -78,18 +67,31 @@ public class GameLogic {
         }
     }
 
-    private static void configure() {
-        System.out.println(bundle.getString("configure.text").formatted(forceUntilCorrect
-                ? bundle.getString("forceUntilCorrect.mode.on") : bundle.getString("forceUntilCorrect.mode.off")));
+    private static void generalSettings() {
+        System.out.print(bundle.getString("general.settings.text").formatted(forceUntilCorrect
+                ? bundle.getString("forceUntilCorrect.mode.on")
+                : bundle.getString("forceUntilCorrect.mode.off")));
+
+        String option = scanner.nextLine();
+
+        switch (option) {
+            case "1" -> multiplicationTableSettings();
+            case "2" -> toggleAnswerUntilCorrect();
+            case "3" -> changeGameMode();
+            default -> Menu.menu();
+        }
+    }
+
+    private static void multiplicationTableSettings() {
+        System.out.println(bundle.getString("multiplication.table.settings.text"));
         System.out.print(bundle.getString("configure.prompt"));
+
         String option = scanner.nextLine();
 
         switch (option) {
             case "1" -> presets();
             case "2" -> changeTable(Operation.ADD);
             case "3" -> changeTable(Operation.REMOVE);
-            case "4" -> toggleAnswerUntilCorrect();
-            case "5" -> changeGameMode();
             default -> Menu.menu();
         }
     }
@@ -192,6 +194,18 @@ public class GameLogic {
         }
 
         System.out.printf(bundle.getString("updated.table"), table);
+    }
+
+
+    private static void checkScore() {
+        System.out.println(bundle.getString("current.score") + score);
+        Menu.menu();
+    }
+
+    private static void resetScore() {
+        score = 0;
+        System.out.println(bundle.getString("reset.score") + score);
+        Menu.menu();
     }
 
     private static void checkCurrentPreset() {
