@@ -36,16 +36,16 @@ public class GameLogic {
         int num1 = chooseRandom(table);
         int num2 = chooseRandom(table);
 
-        int correctAnswer;
+        String operation = gameMode;
 
-        if (gameMode.equals("*")) {
-            correctAnswer = num1 * num2;
-        } else {
-            correctAnswer = num1 + num2;
+        if (gameMode.equals("random")) {
+            operation = Math.random() < 0.5 ? "*" : "+";
         }
 
+        int correctAnswer = operation.equals("*") ? num1 * num2 : num1 + num2;
+
         while (true) {
-            System.out.printf("%d %s %d ? ", num1, gameMode, num2);
+            System.out.printf("%d %s %d ? ", num1, operation, num2);
             String userAnswer = scanner.nextLine();
 
             if (!isValidNumber(userAnswer)) {
@@ -104,6 +104,7 @@ public class GameLogic {
         switch (option) {
             case "1" -> gameMode = "*";
             case "2" -> gameMode = "+";
+            case "3" -> gameMode = "random";
             default -> Menu.menu();
         }
     }

@@ -5,3 +5,5 @@ public class Main {
         Menu.menu();
     }
 }
+
+// TODO FAZER UM MODO ALEATORIO DE SOMA E MULTIPLICAÇÃO
