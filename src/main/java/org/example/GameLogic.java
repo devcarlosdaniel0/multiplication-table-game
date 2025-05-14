@@ -39,10 +39,15 @@ public class GameLogic {
         String operation = gameMode;
 
         if (gameMode.equals("random")) {
-            operation = Math.random() < 0.5 ? "*" : "+";
+            List<String> operations = List.of("*", "+");
+            operation = operations.get(random.nextInt(operations.size()));
         }
 
-        int correctAnswer = operation.equals("*") ? num1 * num2 : num1 + num2;
+        String correctAnswer = switch (operation) {
+            case "*" -> String.valueOf(num1 * num2);
+            case "+" -> String.valueOf(num1 + num2);
+            default -> "0";
+        };
 
         while (true) {
             System.out.printf("%d %s %d ? ", num1, operation, num2);
@@ -54,7 +59,7 @@ public class GameLogic {
                 return;
             }
 
-            if (userAnswer.equals(String.valueOf(correctAnswer))) {
+            if (userAnswer.equals(correctAnswer)) {
                 score++;
                 System.out.println(bundle.getString("correct"));
                 break;
