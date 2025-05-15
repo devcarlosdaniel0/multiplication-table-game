@@ -6,4 +6,3 @@ public class Main {
     }
 }
 
-// TODO FAZER UM MODO ALEATORIO DE SOMA E MULTIPLICAÇÃO
