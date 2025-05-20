@@ -64,7 +64,7 @@ public class GameLogic {
 
             String userAnswer = scanner.nextLine();
 
-            if (!isValidNumber(userAnswer)) {
+            if (!isInteger(userAnswer)) {
                 System.out.println(bundle.getString("final.score") + score);
                 Menu.menu();
                 return;
@@ -157,13 +157,18 @@ public class GameLogic {
                 continue;
             }
 
-            if (!isValidNumber(interval[0]) || !isValidNumber(interval[1])) {
-                System.out.println("Numbers must be higher than zero and integers");
+            if (!isInteger(interval[0]) || !isInteger(interval[1]) ) {
+                System.out.println("Numbers must be integers");
                 continue;
             }
 
             int start = Integer.parseInt(interval[0]);
             int end = Integer.parseInt(interval[1]);
+
+            if (start <= 0 || end <= 0) {
+                System.out.println("Numbers must be higher than zero");
+                continue;
+            }
 
             if (start >= end) {
                 System.out.println("Interval must be ordered in ascending order");
@@ -183,7 +188,7 @@ public class GameLogic {
         System.out.printf(bundle.getString("change.table.prompt"), message);
         String userInput = scanner.nextLine();
 
-        if (!isValidNumber(userInput)) {
+        if (!isInteger(userInput)) {
             Menu.menu();
             return;
         }
@@ -339,10 +344,10 @@ public class GameLogic {
         }
     }
 
-    private static boolean isValidNumber(String userInput) {
+    private static boolean isInteger(String userInput) {
         try {
-            int number = Integer.parseInt(userInput);
-            return number > 0;
+            Integer.parseInt(userInput);
+            return true;
         } catch (NumberFormatException e) {
             return false;
         }
