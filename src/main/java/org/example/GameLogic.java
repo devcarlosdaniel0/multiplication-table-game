@@ -11,6 +11,8 @@ public class GameLogic {
     private static int score;
     private static final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
     private static String gameMode = "*";
+    private static boolean isRandomRange = false;
+    private static int[] randomRangeInterval;
 
     public static void operateOption(String option) {
         while (isPlaying) {
@@ -33,6 +35,8 @@ public class GameLogic {
             return;
         }
 
+        int num1 = chooseRandom(isRandomRange, table);
+        int num2 = chooseRandom(isRandomRange, table);
 
         List<Integer> numbers = new ArrayList<>(List.of(num1, num2));
         Collections.sort(numbers, Comparator.reverseOrder());
@@ -104,6 +108,7 @@ public class GameLogic {
             case "1" -> presets();
             case "2" -> changeTable(Operation.ADD);
             case "3" -> changeTable(Operation.REMOVE);
+            case "4" -> toggleRandomRange();
             default -> Menu.menu();
         }
     }
@@ -127,6 +132,46 @@ public class GameLogic {
         System.out.println(bundle.getString("forceUntilCorrect.mode.changed") + (isForceUntilCorrect
                 ? bundle.getString("forceUntilCorrect.mode.on") : bundle.getString("forceUntilCorrect.mode.off")));
         Menu.menu();
+    }
+
+    private static void toggleRandomRange() {
+        if (!isRandomRange) {
+            randomRangeInterval = getValidInterval();
+        }
+
+        isRandomRange = !isRandomRange;
+
+        System.out.printf("Random range is now set to: %s%n", isRandomRange);
+
+        Menu.menu();
+    }
+
+    private static int[] getValidInterval() {
+        while (true) {
+            System.out.print("Type the interval of numbers to be chosen randomly (ex: 1 30): ");
+            String intervalInput = scanner.nextLine().trim();
+            String[] interval = intervalInput.split("\\s+");
+
+            if (interval.length != 2) {
+                System.out.println("Interval must contain 2 numbers");
+                continue;
+            }
+
+            if (!isValidNumber(interval[0]) || !isValidNumber(interval[1])) {
+                System.out.println("Numbers must be higher than zero and integers");
+                continue;
+            }
+
+            int start = Integer.parseInt(interval[0]);
+            int end = Integer.parseInt(interval[1]);
+
+            if (start >= end) {
+                System.out.println("Interval must be ordered in ascending order");
+                continue;
+            }
+
+            return new int[]{start, end};
+        }
     }
 
     private static void changeTable(Operation operation) {
@@ -296,8 +341,8 @@ public class GameLogic {
 
     private static boolean isValidNumber(String userInput) {
         try {
-            Integer.parseInt(userInput);
-            return true;
+            int number = Integer.parseInt(userInput);
+            return number > 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -307,8 +352,11 @@ public class GameLogic {
         isPlaying = false;
     }
 
-    private static int chooseRandom(Set<Integer> table) {
+    private static int chooseRandom(Boolean isRandomRange, Set<Integer> table) {
         List<Integer> tableList = new ArrayList<>(table);
-        return tableList.get(random.nextInt(tableList.size()));
+
+        return isRandomRange
+                ? random.nextInt(randomRangeInterval[0], randomRangeInterval[1] + 1)
+                : tableList.get(random.nextInt(tableList.size()));
     }
 }
