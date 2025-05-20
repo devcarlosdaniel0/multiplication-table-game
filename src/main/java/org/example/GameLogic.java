@@ -99,7 +99,9 @@ public class GameLogic {
     }
 
     private static void multiplicationTableSettings() {
-        System.out.println(bundle.getString("multiplication.table.settings.text"));
+        System.out.printf(bundle.getString("multiplication.table.settings.text").formatted(isRandomRange
+                ? bundle.getString("toggle.random.range.mode.on")
+                : bundle.getString("toggle.random.range.mode.off")));
         System.out.print(bundle.getString("configure.prompt"));
 
         String option = scanner.nextLine();
@@ -130,7 +132,8 @@ public class GameLogic {
     private static void toggleAnswerUntilCorrect() {
         isForceUntilCorrect = !isForceUntilCorrect;
         System.out.println(bundle.getString("forceUntilCorrect.mode.changed") + (isForceUntilCorrect
-                ? bundle.getString("forceUntilCorrect.mode.on") : bundle.getString("forceUntilCorrect.mode.off")));
+                ? bundle.getString("forceUntilCorrect.mode.on")
+                : bundle.getString("forceUntilCorrect.mode.off")));
         Menu.menu();
     }
 
@@ -141,24 +144,28 @@ public class GameLogic {
 
         isRandomRange = !isRandomRange;
 
-        System.out.printf("Random range is now set to: %s%n", isRandomRange);
+        System.out.printf(bundle.getString("toggle.random.range.status")
+                .formatted(isRandomRange
+                        ? bundle.getString("toggle.random.range.mode.on")
+                        : bundle.getString("toggle.random.range.mode.off")));
+        System.out.printf(bundle.getString("toggle.random.range.actual.interval"), randomRangeInterval[0], randomRangeInterval[1]);
 
         Menu.menu();
     }
-
+    
     private static int[] getValidInterval() {
         while (true) {
-            System.out.print("Type the interval of numbers to be chosen randomly (ex: 1 30): ");
+            System.out.print(bundle.getString("valid.interval.prompt"));
             String intervalInput = scanner.nextLine().trim();
             String[] interval = intervalInput.split("\\s+");
 
             if (interval.length != 2) {
-                System.out.println("Interval must contain 2 numbers");
+                System.out.println(bundle.getString("valid.interval.2numbers"));
                 continue;
             }
 
             if (!isInteger(interval[0]) || !isInteger(interval[1]) ) {
-                System.out.println("Numbers must be integers");
+                System.out.println(bundle.getString("valid.interval.integers"));
                 continue;
             }
 
@@ -166,12 +173,12 @@ public class GameLogic {
             int end = Integer.parseInt(interval[1]);
 
             if (start <= 0 || end <= 0) {
-                System.out.println("Numbers must be higher than zero");
+                System.out.println(bundle.getString("valid.interval.higher.than.zero"));
                 continue;
             }
 
             if (start >= end) {
-                System.out.println("Interval must be ordered in ascending order");
+                System.out.println(bundle.getString("valid.interval.ascending.order"));
                 continue;
             }
 
