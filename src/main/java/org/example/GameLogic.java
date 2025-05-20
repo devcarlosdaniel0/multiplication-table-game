@@ -6,14 +6,14 @@ public class GameLogic {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Random random = new Random();
     private static final Set<Integer> table = new HashSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-    private static boolean playing = true;
-    private static boolean forceUntilCorrect = false;
+    private static boolean isPlaying = true;
+    private static boolean isForceUntilCorrect = false;
     private static int score;
     private static final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
     private static String gameMode = "*";
 
     public static void operateOption(String option) {
-        while (playing) {
+        while (isPlaying) {
             switch (option) {
                 case "1" -> play(gameMode);
                 case "2" -> generalSettings();
@@ -33,8 +33,6 @@ public class GameLogic {
             return;
         }
 
-        int num1 = chooseRandom(table);
-        int num2 = chooseRandom(table);
 
         List<Integer> numbers = new ArrayList<>(List.of(num1, num2));
         Collections.sort(numbers, Comparator.reverseOrder());
@@ -74,7 +72,7 @@ public class GameLogic {
                 break;
             } else {
                 System.out.println(bundle.getString("wrong"));
-                if (!forceUntilCorrect) {
+                if (!isForceUntilCorrect) {
                     break;
                 }
             }
@@ -82,7 +80,7 @@ public class GameLogic {
     }
 
     private static void generalSettings() {
-        System.out.print(bundle.getString("general.settings.text").formatted(forceUntilCorrect
+        System.out.print(bundle.getString("general.settings.text").formatted(isForceUntilCorrect
                 ? bundle.getString("forceUntilCorrect.mode.on")
                 : bundle.getString("forceUntilCorrect.mode.off")));
 
@@ -125,8 +123,8 @@ public class GameLogic {
     }
 
     private static void toggleAnswerUntilCorrect() {
-        forceUntilCorrect = !forceUntilCorrect;
-        System.out.println(bundle.getString("forceUntilCorrect.mode.changed") + (forceUntilCorrect
+        isForceUntilCorrect = !isForceUntilCorrect;
+        System.out.println(bundle.getString("forceUntilCorrect.mode.changed") + (isForceUntilCorrect
                 ? bundle.getString("forceUntilCorrect.mode.on") : bundle.getString("forceUntilCorrect.mode.off")));
         Menu.menu();
     }
@@ -306,7 +304,7 @@ public class GameLogic {
     }
 
     private static void leave() {
-        playing = false;
+        isPlaying = false;
     }
 
     private static int chooseRandom(Set<Integer> table) {
