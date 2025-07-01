@@ -33,20 +33,43 @@ Você pode testar diferentes modos e, se encontrar algum problema, sinta-se à v
 2. [📦 Clique aqui para baixar o projeto (ZIP)](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip)  
    ou vá até o repositório e clique em **"Code" → "Download ZIP"**.
 
-3. Extraia o arquivo ZIP com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
+3. Salve o projeto na pasta de sua preferência, por exemplo Downloads.
 
-4. Abra o **PowerShell**.
+4. Vá até a pasta onde o arquivo foi baixado, clique com botão direito e extraia com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
 
-5. Navegue até a pasta extraída:
+5. Abra o menu de pesquisa e digite **PowerShell**, abrindo-o em seguida.
+   
+6. Navegue até a pasta extraída digitando o seguinte comando:
    ```bash
-   cd Downloads
-   cd multiplication-table-game-main
+   cd \Downloads\multiplication-table-game-main
+   ```
 
-6. Execute o jogo:
+obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\{nome do seu usuário} e, caso a sua pasta de Downloads esteja localizada em outro disco local, por por exemplo disco local D, digite os seguintes comandos: 
+   ```bash
+   D:
+   cd \Users\{nome do seu usuário}\Downloads\multiplication-table-game-main
+   ```
+
+6. Execute o jogo digitando o comando:
    ```bash
    java -jar multiplication-table-game.jar
+   ```
 
 8. Pronto! Agora é só seguir as instruções do menu para jogar ou configurar.
 
-Dica: Para voltar ao menu durante o jogo, digite qualquer tecla.
-Para sair completamente, selecione a opção de saída no menu.
+### 🐧 Linux
+
+1. Abra o terminal e digite o comando:
+   ```bash
+   git clone https://github.com/devcarlosdaniel0/multiplication-table-game.git
+   ```
+
+2. Digite o comando:
+   ```bash
+   cd multiplication-table-game/
+   ```
+
+3. Abra o jogo com o comando:
+   ```bash
+   java -jar multiplication-table-game.jar 
+   ```
