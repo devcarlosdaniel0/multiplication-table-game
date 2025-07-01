@@ -1,17 +1,18 @@
-# 📚 Projeto: Jogo de Tabuada no Terminal (CLI)
+# 📚 Projeto: Jogo de Operações Matemáticas no Terminal (CLI)
 
 ## 🎯 Objetivo
 
-Esse projeto foi criado para resolver um problema comum: **esquecer a tabuada** com o tempo.  
-Por isso, desenvolvi um jogo simples em **linha de comando (CLI)** para praticar **multiplicação** de forma rápida, prática e personalizada.
+Esse projeto foi criado inicialmente para resolver um problema comum: **esquecer a tabuada** com o tempo.  
+Entretanto, eu fiz algumas alterações e você pode realizar todas as operações matemáticas: somar, subtrair e multiplicar.
+Meu jogo é altamente customizável, com diversas configurações que você pode fazer, que serão abordadas com mais detalhes nos tópicos abaixos.
 
 ## 🕹️ Como funciona
 
 Este é um jogo interativo que roda diretamente no **terminal**. Você interage com o menu para configurar e iniciar as partidas.
 
-- A cada rodada, uma operação aleatória de multiplicação aparece na tela.
+- A cada rodada, uma operação aleatória aparece na tela, Exemplo: 8 * 7, 7 + 5, 9 - 5.
 - Se acertar, ganha um ponto.
-- Se errar, recebe uma mensagem de erro — mas pode continuar tentando!
+- Se errar, recebe uma mensagem de erro, mas pode continuar tentando.
 
 ### ⚙️ Configurações disponíveis:
 
