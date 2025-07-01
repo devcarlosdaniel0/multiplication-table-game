@@ -19,7 +19,7 @@ Você pode brincar e testar as possibilidades e, em caso de algum bug inesperado
 
 # Como rodar o projeto? (Para Windows)
 O projeto foi feito em Java, portanto, é necessário que você tenha o Java instalado em sua máquina. Basta pesquisar <a href="https://www.java.com/pt-BR/download/?locale=pt_BR" target="_blank">"Java Download"</a> no Google.
-Agora para baixar o projeto, clique no botão azul [📦 Baixar ZIP do projeto](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip) do Github e clique em Download ZIP
+Agora para baixar o projeto, [📦 clique aqui](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip) ou no botão azul do Github e clique em Download ZIP
 Mande o arquivo para uma pasta de sua preferência, por exemplo, Downloads.
 Extraia o arquivo com o <a href="https://www.win-rar.com/predownload.html?&L=9" target="_blank">"Winrar"</a>.
 Agora no menu de pesquisa, digite PowerShell e abra.
