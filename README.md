@@ -21,7 +21,7 @@ Você pode brincar e testar as possibilidades e, em caso de algum bug inesperado
 O projeto foi feito em Java, portanto, é necessário que você tenha o Java instalado em sua máquina. Basta pesquisar <a href="https://www.java.com/pt-BR/download/?locale=pt_BR" target="_blank">"Java Download"</a> no Google.
 Agora para baixar o projeto, clique no botão azul "<> Code" do Github e clique em Download ZIP
 Mande o arquivo para uma pasta de sua preferência, por exemplo, Downloads.
-Extraia o arquivo com o <a href="[https://www.java.com/pt-BR/download/?locale=pt_BR](https://www.win-rar.com/predownload.html?&L=9)" target="_blank">"Winrar"</a>.
+Extraia o arquivo com o <a href="https://www.win-rar.com/predownload.html?&L=9" target="_blank">"Winrar"</a>.
 Agora no menu de pesquisa, digite PowerShell e abra.
 Aparecerá "PS C:\Users\{nome do seu usuário}
 Agora você digitará o seguinte comando: "cd {nome da pasta que você baixou}" (sem as aspas) caso tenha extraído na sua pasta de Downloads, por exemplo, dê um cd Donwloads.
