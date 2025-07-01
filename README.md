@@ -4,7 +4,6 @@
 
 Esse projeto foi criado inicialmente para resolver um problema comum: **esquecer a tabuada** com o tempo.  
 Entretanto, eu fiz algumas alterações e você pode realizar todas as operações matemáticas: somar, subtrair e multiplicar.
-Meu jogo é altamente customizável, com diversas configurações que você pode fazer, que serão abordadas com mais detalhes nos tópicos abaixos.
 
 ## 🕹️ Como funciona
 
