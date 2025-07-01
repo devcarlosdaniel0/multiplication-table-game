@@ -19,8 +19,6 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
 - **Predefinições de dificuldade**: escolha multiplicações com números mais difíceis.
 - **Modo personalizado**: selecione quais números deseja praticar.
 
-Você pode testar diferentes modos e, se encontrar algum problema, sinta-se à vontade para abrir uma **issue** ou enviar uma **Pull Request**.
-
 ---
 
 ## 💻 Como rodar o projeto
@@ -28,7 +26,7 @@ Você pode testar diferentes modos e, se encontrar algum problema, sinta-se à v
 ### 🔵 Windows
 
 1. Verifique se o Java está instalado. Caso não tenha:
-   👉 [Baixe aqui o Java](https://www.java.com/pt-BR/download/?locale=pt_BR)
+   👉 [Baixe aqui o Java](https://www.java.com/pt-BR/download/?locale=pt_BR).
 
 2. [📦 Clique aqui para baixar o projeto (ZIP)](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip)  
    ou vá até o repositório e clique em **"Code" → "Download ZIP"**.
@@ -44,13 +42,13 @@ Você pode testar diferentes modos e, se encontrar algum problema, sinta-se à v
    cd \Downloads\multiplication-table-game-main
    ```
 
-obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\{nome do seu usuário} e, caso a sua pasta de Downloads esteja localizada em outro disco local, por por exemplo disco local D, digite os seguintes comandos: 
+obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de Downloads esteja localizada em outro disco local, por exemplo disco local D, digite os seguintes comandos: 
    ```bash
    D:
-   cd \Users\{nome do seu usuário}\Downloads\multiplication-table-game-main
+   cd \Users\*NOME DO SEU USUÁRIO*\Downloads\multiplication-table-game-main
    ```
 
-6. Execute o jogo digitando o comando:
+7. Execute o jogo digitando o comando:
    ```bash
    java -jar multiplication-table-game.jar
    ```
@@ -73,3 +71,5 @@ obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\{
    ```bash
    java -jar multiplication-table-game.jar 
    ```
+
+4. Pronto! Agora é só seguir as instruções do menu para jogar ou configurar.
