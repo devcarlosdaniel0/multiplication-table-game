@@ -39,7 +39,7 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
    
 6. Navegue com o terminal (**PowerShell**) até pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando o seguinte comando:
    ```bash
-   cd \Downloads\multiplication-table-game-main
+   cd .\Downloads\multiplication-table-game-main
    ```
 
 obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de **Downloads** esteja localizada em outro disco local, por exemplo, disco local D, digite os seguintes comandos: 
