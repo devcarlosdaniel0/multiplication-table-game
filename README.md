@@ -37,7 +37,7 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
 
 5. Abra o menu de pesquisa e digite **PowerShell**, abrindo-o em seguida.
    
-6. Vá para a pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando o seguinte comando:
+6. Navegue com o terminal (**PowerShell**) até pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando o seguinte comando:
    ```bash
    cd \Downloads\multiplication-table-game-main
    ```
