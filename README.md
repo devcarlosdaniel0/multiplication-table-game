@@ -31,18 +31,18 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
 2. [📦 Clique aqui para baixar o projeto (ZIP)](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip)  
    ou vá até o repositório e clique em **"Code" → "Download ZIP"**.
 
-3. Salve o projeto na pasta de sua preferência, por exemplo Downloads.
+3. Salve o projeto na pasta de sua preferência, por exemplo, **Downloads**.
 
-4. Vá até a pasta onde o arquivo foi baixado, clique com botão direito e extraia com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
+4. Vá até a pasta onde o projeto foi baixado, clique com botão direito do mouse e extraia com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
 
 5. Abra o menu de pesquisa e digite **PowerShell**, abrindo-o em seguida.
    
-6. Navegue até a pasta extraída digitando o seguinte comando:
+6. Vá para a pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando o seguinte comando:
    ```bash
    cd \Downloads\multiplication-table-game-main
    ```
 
-obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de Downloads esteja localizada em outro disco local, por exemplo disco local D, digite os seguintes comandos: 
+obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de **Downloads** esteja localizada em outro disco local, por exemplo, disco local D, digite os seguintes comandos: 
    ```bash
    D:
    cd \Users\$env:USERNAME\Downloads\multiplication-table-game-main
