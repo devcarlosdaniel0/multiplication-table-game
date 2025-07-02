@@ -45,7 +45,7 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
 obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de Downloads esteja localizada em outro disco local, por exemplo disco local D, digite os seguintes comandos: 
    ```bash
    D:
-   cd \Users\*NOME DO SEU USUÁRIO*\Downloads\multiplication-table-game-main
+   cd \Users\$env:USERNAME\Downloads\multiplication-table-game-main
    ```
 
 7. Execute o jogo digitando o comando:
