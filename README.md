@@ -1,17 +1,30 @@
-# 📚 Projeto: Jogo de Operações Matemáticas no Terminal (CLI)
+# 📚 Jogo de Operações Matemáticas
+
+Esse é um projeto Command Line Interface (CLI) <br>
+Treine cálculo mental de forma rápida e prática via Terminal. <br>
+O jogo gera operações aleatórias para você resolver e melhora sua agilidade com tabuada, soma e subtração.
 
 ## 🎯 Objetivo
 
-Esse projeto foi criado inicialmente para resolver um problema comum: **esquecer a tabuada** com o tempo.  
-Entretanto, eu fiz algumas alterações e você pode realizar todas as operações matemáticas: somar, subtrair e multiplicar.
+Este projeto nasceu para resolver um problema real: **esquecer a tabuada** com o tempo.  
+Todavia, atualmente ele evoluiu e virou um jogo completo para praticar soma, subtração e multiplicação com diversos números aleatórios para você se tornar **ágil em cálculo mental**. 
+
+Perfeito para quem quer:
+- estudar
+- treinar o cérebro
+- preparar-se para provas
 
 ## 🕹️ Como funciona
 
-Este é um jogo interativo que roda diretamente no **terminal**. Você interage com o menu para configurar e iniciar as partidas.
+Rodadas acontecem no terminal e você responde às operações exibidas na tela.
 
-- A cada rodada, uma operação aleatória aparece na tela, Exemplo: 8 * 7, 7 + 5, 9 - 5.
-- Se acertar, ganha um ponto.
-- Se errar, recebe uma mensagem de erro, mas pode continuar tentando.
+A cada rodada, uma operação aleatória aparece na tela, exemplo:
+- 8 × 7
+- 7 + 5
+- 9 − 5
+
+Se acertar, ganha um ponto. <br>
+Se errar, recebe um aviso de erro.
 
 ### ⚙️ Configurações disponíveis:
 
@@ -25,30 +38,29 @@ Este é um jogo interativo que roda diretamente no **terminal**. Você interage 
 
 ### 🔵 Windows
 
-1. Verifique se o Java está instalado. Caso não tenha:
-   👉 [Baixe aqui o Java](https://www.java.com/pt-BR/download/?locale=pt_BR).
+1. Verifique se o Java está instalado. Caso não esteja, realize a instalação por meio do site oficial:
+   https://www.java.com/pt-BR/download
 
-2. [📦 Clique aqui para baixar o projeto (ZIP)](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip)  
-   ou vá até o repositório e clique em **"Code" → "Download ZIP"**.
+2. [Clique aqui para baixar o projeto](https://github.com/devcarlosdaniel0/multiplication-table-game/archive/refs/heads/main.zip) ou pelo botão Download ZIP no GitHub
 
 3. Salve o projeto na pasta de sua preferência, por exemplo, **Downloads**.
 
-4. Vá até a pasta onde o projeto foi baixado, clique com botão direito do mouse e extraia com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
+4. Vá até a pasta onde o projeto foi salvo e extraia com o [WinRAR](https://www.win-rar.com/predownload.html?&L=9).
 
 5. Abra o menu de pesquisa e digite **PowerShell**, abrindo-o em seguida.
    
-6. Navegue com o terminal (**PowerShell**) até pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando o seguinte comando:
+6. Navegue com o terminal (**PowerShell**) até pasta onde extraiu o arquivo, nesse caso, **Downloads**, digitando:
    ```bash
    cd .\Downloads\multiplication-table-game-main
    ```
 
-obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*NOME DO SEU USUÁRIO* e, caso a sua pasta de **Downloads** esteja localizada em outro disco local, por exemplo, disco local D, digite os seguintes comandos: 
+🔎 Se estiver em outro disco (ex: D:), use:
    ```bash
    D:
    cd \Users\$env:USERNAME\Downloads\multiplication-table-game-main
    ```
 
-7. Execute o jogo digitando o comando:
+7. Execute o jogo:
    ```bash
    java -jar multiplication-table-game.jar
    ```
@@ -57,17 +69,17 @@ obs: Ao abrir o **PowerShell**, você encontrará em seu terminal: PS C:\Users\*
 
 ### 🐧 Linux
 
-1. Abra o terminal e digite o comando:
+1. Clone o repositório:
    ```bash
    git clone https://github.com/devcarlosdaniel0/multiplication-table-game.git
    ```
 
-2. Digite o comando:
+2. Navegue até a pasta:
    ```bash
    cd multiplication-table-game/
    ```
 
-3. Abra o jogo com o comando:
+3. Execute o jogo:
    ```bash
    java -jar multiplication-table-game.jar 
    ```
