@@ -1,0 +1,247 @@
+package org.example.refactor;
+
+import org.example.refactor.enums.Operation;
+
+import java.util.*;
+
+public class GameService {
+    private final Scanner scanner = new Scanner(System.in);
+    private final Random random = new Random();
+    private final GameState gameState;
+    private final Menu menu;
+
+    public GameService() {
+        this.gameState = new GameState();
+        this.menu = new Menu();
+    }
+
+    public void play() {
+        while (gameState.isPlaying()) {
+            if (gameState.getNumbers().isEmpty()) {
+                System.out.println("Game numbers should not be empty");
+                return;
+            }
+
+            int n1 = randomNumber();
+            int n2 = randomNumber();
+
+            System.out.printf("%d x %d? ", n1, n2);
+            String input = scanner.nextLine();
+
+            Integer userAnswer;
+
+            try {
+                userAnswer = Integer.parseInt(input);
+            } catch (Exception e) {
+                return;
+            }
+
+            int correctAnswer = n1 * n2;
+
+            if (userAnswer.equals(correctAnswer)) {
+                System.out.println("Correct!");
+                gameState.incrementScore();
+            } else {
+                System.out.println("Wrong");
+            }
+        }
+    }
+
+    public void viewScore() {
+        System.out.printf("Your actual score is: %d%n", gameState.getScore());
+    }
+
+    public void generalSettings() {
+        String option = menu.showGeneralSettings();
+
+        switch (option) {
+            case "1" -> generatedNumberSettings();
+        }
+    }
+
+    private void generatedNumberSettings() {
+        String option = menu.showGeneratedNumbersSettings();
+
+        switch (option) {
+            case "1" -> numberPresets();
+            case "2" -> changeNumbers(Operation.ADD);
+            case "3" -> changeNumbers(Operation.REMOVE);
+            case "4" -> createCustomNumbers();
+            case "5" -> randomRange();
+            case "6" -> checkCurrentNumbers();
+        }
+    }
+
+    private void randomRange() {
+        if (gameState.isRandomRange()) {
+            gameState.toggleRandomRange();
+            System.out.println("random range is now set to: " + gameState.isRandomRange());
+
+            return;
+        }
+
+        System.out.println("Type the interval of numbers to be random generated separated by spaces, ex: '1 30' (1 to 30)");
+        System.out.print("> ");
+
+        String input = scanner.nextLine().trim();
+        String[] interval = input.split("\\s+");
+
+        if (interval.length != 2) {
+            System.out.println("Please insert 2 numbers, for the start and end of interval");
+            return;
+        }
+
+        if (!isInteger(interval[0]) || !isInteger(interval[1])) {
+            System.out.println("Must insert numbers!");
+            return;
+        }
+
+        int start = Integer.parseInt(interval[0]);
+        int end = Integer.parseInt(interval[1]);
+
+        if (start <= 0 || end <= 0) {
+            System.out.println("Must be greater than 0");
+            return;
+        }
+
+        if (start >= end) {
+            System.out.println("Start cant be greater than end!");
+            return;
+        }
+
+        Set<Integer> randomRangeInterval = gameState.getRandomRangeInterval();
+
+        randomRangeInterval.clear();
+        randomRangeInterval.add(start);
+        randomRangeInterval.add(end);
+
+        gameState.toggleRandomRange();
+    }
+
+    private void createCustomNumbers() {
+        System.out.println("""
+                Type the numbers you want to include
+                separated by spaces (ex: '2 6 10 15 30')
+                Type 'done' when you finish.
+                """);
+
+        Set<Integer> customNumbers = new TreeSet<>();
+        Set<Integer> actualNumbers = gameState.getNumbers();
+
+        while (true) {
+            System.out.print("Enter numbers or 'done' to finish: ");
+            String userInput = scanner.nextLine().trim();
+
+            if (userInput.equalsIgnoreCase("done")) {
+                break;
+            }
+
+            String[] userNumbers = userInput.split("\\s+");
+
+            for (String userNumber : userNumbers) {
+                try {
+                    int number = Integer.parseInt(userNumber.trim());
+                    if (number < 1) {
+                        System.out.println("Number must greater or equal than 1");
+                        break;
+                    }
+                    customNumbers.add(number);
+                } catch (NumberFormatException e) {
+                    System.out.println("Should insert numbers, not Strings");
+                    break;
+                }
+            }
+        }
+
+        if (customNumbers.isEmpty()) {
+            System.out.println("numbers cant be empty, previous was kept: " + actualNumbers);
+            return;
+        }
+
+        actualNumbers.clear();
+        actualNumbers.addAll(customNumbers);
+    }
+
+    private void numberPresets() {
+        String option = menu.showNumberPresets();
+
+        Set<Integer> numbers = gameState.getNumbers();
+
+        switch (option) {
+            case "1" -> {
+                numbers.clear();
+                numbers.addAll(Set.of(6, 7, 8, 9));
+            }
+            case "2" -> {
+                numbers.clear();
+                numbers.addAll(Set.of(3, 4, 6, 7, 8, 9));
+            }
+            case "3" -> {
+                numbers.clear();
+                numbers.addAll(Set.of(2, 3, 4, 5, 6, 7, 8, 9));
+            }
+            case "4" -> {
+                numbers.clear();
+                numbers.addAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+            }
+        }
+    }
+
+    private void changeNumbers(Operation operation) {
+        Set<Integer> actualNumbers = gameState.getNumbers();
+
+        while (true) {
+            System.out.println("Actual numbers is: " + actualNumbers);
+            System.out.printf("Type the number to be %s: ", operation);
+
+            String input = scanner.nextLine().trim();
+
+            Integer number;
+
+            try {
+                number = Integer.parseInt(input);
+            } catch (Exception e) {
+                System.out.println("Updated to: " + actualNumbers);
+                return;
+            }
+
+            if (number < 1) {
+                System.out.println("Number should be equal or greater than 1");
+                break;
+            }
+
+            if (Operation.ADD.equals(operation)) {
+                actualNumbers.add(number);
+            } else {
+                actualNumbers.remove(number);
+            }
+        }
+
+    }
+
+    private Integer randomNumber() {
+        if (!gameState.isRandomRange()) {
+            List<Integer> numbersList = new ArrayList<>(gameState.getNumbers());
+            return numbersList.get(random.nextInt(numbersList.size()));
+        }
+
+        List<Integer> randomRangeIntervalList = new ArrayList<>(gameState.getRandomRangeInterval());
+
+        return random.nextInt(randomRangeIntervalList.get(0), randomRangeIntervalList.get(1));
+    }
+
+    private static boolean isInteger(String userInput) {
+        try {
+            Integer.parseInt(userInput);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void checkCurrentNumbers() {
+        Set<Integer> numbers = gameState.getNumbers();
+
+        System.out.println("Current numbers is: " + numbers);
+    }
+}

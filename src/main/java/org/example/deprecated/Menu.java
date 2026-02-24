@@ -1,4 +1,4 @@
-package org.example;
+package org.example.deprecated;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
