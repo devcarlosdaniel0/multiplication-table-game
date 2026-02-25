@@ -23,6 +23,17 @@ public class Menu {
     public String showGeneralSettings() {
         System.out.println("1. Generated numbers settings");
         System.out.printf("2. Toggle answer until correct (CURRENT: %s)%n", gameState.isAnswerUntilCorrect());
+        System.out.println("3. Change math operations");
+        System.out.print("> ");
+
+        return scanner.nextLine();
+    }
+
+    public String showGameOperation() {
+        System.out.println("1. Multiply");
+        System.out.println("2. Add");
+        System.out.println("3. Subtract");
+        System.out.println("4. Random");
         System.out.print("> ");
 
         return scanner.nextLine();

@@ -1,6 +1,6 @@
 package org.example.refactor.enums;
 
-public enum Operation {
+public enum ChangeNumberOperation {
     ADD,
     REMOVE
 }

@@ -1,6 +1,7 @@
 package org.example.refactor;
 
-import org.example.refactor.enums.Operation;
+import org.example.refactor.enums.ChangeNumberOperation;
+import org.example.refactor.enums.MathOperation;
 
 import java.util.*;
 
@@ -24,12 +25,13 @@ public class GameService {
         while (gameState.isPlaying()) {
             int n1 = randomNumber();
             int n2 = randomNumber();
-            int correctAnswer = n1 * n2;
+
+            int correctAnswer = gameState.getMathOperation().apply(n1,n2);
 
             boolean correct = false;
 
             while (!correct) {
-                System.out.printf("%d x %d? ", n1, n2);
+                System.out.printf("%d %s %d? ", n1, gameState.getMathOperation().getSymbol(), n2);
                 String input = scanner.nextLine();
 
                 Integer userAnswer;
@@ -64,6 +66,18 @@ public class GameService {
         switch (option) {
             case "1" -> generatedNumberSettings();
             case "2" -> gameState.toggleAnswerUntilCorrect();
+            case "3" -> changeGameOperation();
+        }
+    }
+
+    private void changeGameOperation() {
+        String option = menu.showGameOperation();
+
+        switch (option) {
+            case "1" -> gameState.setMathOperation(MathOperation.MULTIPLY);
+            case "2" -> gameState.setMathOperation(MathOperation.ADD);
+            case "3" -> gameState.setMathOperation(MathOperation.SUBTRACT);
+            case "4" -> gameState.setMathOperation(MathOperation.RANDOM);
         }
     }
 
@@ -72,8 +86,8 @@ public class GameService {
 
         switch (option) {
             case "1" -> numberPresets();
-            case "2" -> changeNumbers(Operation.ADD);
-            case "3" -> changeNumbers(Operation.REMOVE);
+            case "2" -> changeNumbers(ChangeNumberOperation.ADD);
+            case "3" -> changeNumbers(ChangeNumberOperation.REMOVE);
             case "4" -> createCustomNumbers();
             case "5" -> randomRange();
             case "6" -> checkCurrentNumbers();
@@ -195,12 +209,12 @@ public class GameService {
         }
     }
 
-    private void changeNumbers(Operation operation) {
+    private void changeNumbers(ChangeNumberOperation changeNumberOperation) {
         Set<Integer> actualNumbers = gameState.getNumbers();
 
         while (true) {
             System.out.println("Actual numbers is: " + actualNumbers);
-            System.out.printf("Type the number to be %s: ", operation);
+            System.out.printf("Type the number to be %s: ", changeNumberOperation);
 
             String input = scanner.nextLine().trim();
 
@@ -218,7 +232,7 @@ public class GameService {
                 break;
             }
 
-            if (Operation.ADD.equals(operation)) {
+            if (ChangeNumberOperation.ADD.equals(changeNumberOperation)) {
                 actualNumbers.add(number);
             } else {
                 actualNumbers.remove(number);
