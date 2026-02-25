@@ -174,7 +174,7 @@ public class GameService {
         }
 
         if (customNumbers.isEmpty()) {
-            System.out.println("numbers cant be empty, previous was kept: " + actualNumbers);
+            System.out.println("Numbers cant be empty, previous was kept: " + actualNumbers);
             return;
         }
 
@@ -216,14 +216,12 @@ public class GameService {
 
             String input = scanner.nextLine().trim();
 
-            Integer number;
-
-            try {
-                number = Integer.parseInt(input);
-            } catch (Exception e) {
+            if (!isInteger(input)) {
                 System.out.println("Updated to: " + actualNumbers);
                 return;
             }
+
+            Integer number = Integer.parseInt(input);
 
             if (number <= 0) {
                 System.out.println("Number should be greater than 0");
@@ -250,9 +248,9 @@ public class GameService {
         return random.nextInt(randomRangeIntervalList.get(0), randomRangeIntervalList.get(1));
     }
 
-    private boolean isInteger(String userInput) {
+    private boolean isInteger(String input) {
         try {
-            Integer.parseInt(userInput);
+            Integer.parseInt(input);
             return true;
         } catch (NumberFormatException e) {
             return false;
