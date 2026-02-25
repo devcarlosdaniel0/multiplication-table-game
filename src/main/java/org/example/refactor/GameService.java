@@ -75,8 +75,7 @@ public class GameService {
     private void randomRange() {
         if (gameState.isRandomRange()) {
             gameState.toggleRandomRange();
-            System.out.println("random range is now set to: " + gameState.isRandomRange());
-
+            System.out.println("Random range is now set to: " + gameState.isRandomRange());
             return;
         }
 
@@ -116,6 +115,7 @@ public class GameService {
         randomRangeInterval.add(end);
 
         gameState.toggleRandomRange();
+        System.out.println("Random range is now set to: " + gameState.isRandomRange());
     }
 
     private void createCustomNumbers() {

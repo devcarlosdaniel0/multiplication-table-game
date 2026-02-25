@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class GameState {
-    private boolean playing = true;
-    private boolean randomRange = false;
+    private static boolean playing = true;
+    private static boolean randomRange = false;
     private Set<Integer> randomRangeInterval = new TreeSet<>();
     private int score = 0;
     private Set<Integer> numbers = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));

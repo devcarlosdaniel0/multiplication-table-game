@@ -5,6 +5,11 @@ import java.util.Scanner;
 public class Menu {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final GameState gameState;
+
+    public Menu() {
+        this.gameState = new GameState();
+    }
 
     public String showInitial() {
         System.out.println("1. Play");
@@ -27,7 +32,7 @@ public class Menu {
         System.out.println("2. Add number (one at time)");
         System.out.println("3. Remove number (one at time)");
         System.out.println("4. Choose custom numbers");
-        System.out.println("5. Random range");
+        System.out.printf("5. Random range (CURRENT: %s)%n", gameState.isRandomRange());
         System.out.println("6. Check current numbers");
         System.out.print("> ");
 
