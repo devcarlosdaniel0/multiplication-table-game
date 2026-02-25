@@ -1,14 +1,17 @@
 package org.example.refactor;
 
+import java.util.Scanner;
+
 public class Game {
     private final GameState gameState;
     private final Menu menu;
     private final GameService gameService;
 
     public Game() {
+        Scanner scanner = new Scanner(System.in);
         this.gameState = new GameState();
-        this.menu = new Menu(gameState);
-        this.gameService = new GameService(gameState, menu);
+        this.menu = new Menu(scanner, gameState);
+        this.gameService = new GameService(scanner, gameState, menu);
     }
 
     public void start() {

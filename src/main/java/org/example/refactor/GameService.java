@@ -6,12 +6,13 @@ import org.example.refactor.enums.MathOperation;
 import java.util.*;
 
 public class GameService {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private final Random random = new Random();
     private final GameState gameState;
     private final Menu menu;
 
-    public GameService(GameState gameState, Menu menu) {
+    public GameService(Scanner scanner, GameState gameState, Menu menu) {
+        this.scanner = scanner;
         this.gameState = gameState;
         this.menu = menu;
     }

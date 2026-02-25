@@ -3,11 +3,11 @@ package org.example.refactor;
 import java.util.Scanner;
 
 public class Menu {
-
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
     private final GameState gameState;
 
-    public Menu(GameState gameState) {
+    public Menu(Scanner scanner, GameState gameState) {
+        this.scanner = scanner;
         this.gameState = gameState;
     }
 
