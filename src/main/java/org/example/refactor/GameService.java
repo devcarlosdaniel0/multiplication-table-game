@@ -32,15 +32,13 @@ public class GameService {
 
             while (!correct) {
                 System.out.printf("%d %s %d? ", n1, gameState.getMathOperation().getSymbol(), n2);
-                String input = scanner.nextLine();
+                String input = scanner.nextLine().trim();
 
-                Integer userAnswer;
-
-                try {
-                    userAnswer = Integer.parseInt(input);
-                } catch (Exception e) {
+                if (!isInteger(input)) {
                     return;
                 }
+
+                int userAnswer = Integer.parseInt(input);
 
                 if (userAnswer == correctAnswer) {
                     System.out.println("Correct!");
@@ -164,7 +162,8 @@ public class GameService {
                 try {
                     int number = Integer.parseInt(userNumber.trim());
                     if (number < 1) {
-                        System.out.println("Number must greater or equal than 1");
+                    if (number <= 0) {
+                        System.out.println("Number must greater than 0");
                         break;
                     }
                     customNumbers.add(number);
@@ -227,8 +226,8 @@ public class GameService {
                 return;
             }
 
-            if (number < 1) {
-                System.out.println("Number should be equal or greater than 1");
+            if (number <= 0) {
+                System.out.println("Number should be greater than 0");
                 break;
             }
 
@@ -252,7 +251,7 @@ public class GameService {
         return random.nextInt(randomRangeIntervalList.get(0), randomRangeIntervalList.get(1));
     }
 
-    private static boolean isInteger(String userInput) {
+    private boolean isInteger(String userInput) {
         try {
             Integer.parseInt(userInput);
             return true;
