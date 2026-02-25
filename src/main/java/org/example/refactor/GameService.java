@@ -161,7 +161,6 @@ public class GameService {
             for (String userNumber : userNumbers) {
                 try {
                     int number = Integer.parseInt(userNumber.trim());
-                    if (number < 1) {
                     if (number <= 0) {
                         System.out.println("Number must greater than 0");
                         break;
