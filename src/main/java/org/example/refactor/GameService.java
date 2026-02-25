@@ -16,33 +16,40 @@ public class GameService {
     }
 
     public void play() {
-        while (gameState.isPlaying()) {
-            if (gameState.getNumbers().isEmpty()) {
-                System.out.println("Game numbers should not be empty");
-                return;
-            }
+        if (gameState.getNumbers().isEmpty()) {
+            System.out.println("Game numbers should not be empty");
+            return;
+        }
 
+        while (gameState.isPlaying()) {
             int n1 = randomNumber();
             int n2 = randomNumber();
-
-            System.out.printf("%d x %d? ", n1, n2);
-            String input = scanner.nextLine();
-
-            Integer userAnswer;
-
-            try {
-                userAnswer = Integer.parseInt(input);
-            } catch (Exception e) {
-                return;
-            }
-
             int correctAnswer = n1 * n2;
 
-            if (userAnswer.equals(correctAnswer)) {
-                System.out.println("Correct!");
-                gameState.incrementScore();
-            } else {
-                System.out.println("Wrong");
+            boolean correct = false;
+
+            while (!correct) {
+                System.out.printf("%d x %d? ", n1, n2);
+                String input = scanner.nextLine();
+
+                Integer userAnswer;
+
+                try {
+                    userAnswer = Integer.parseInt(input);
+                } catch (Exception e) {
+                    return;
+                }
+
+                if (userAnswer == correctAnswer) {
+                    System.out.println("Correct!");
+                    gameState.incrementScore();
+                    correct = true;
+                } else {
+                    System.out.println("Wrong");
+                    if (!gameState.isAnswerUntilCorrect()) {
+                        break;
+                    }
+                }
             }
         }
     }
@@ -56,6 +63,7 @@ public class GameService {
 
         switch (option) {
             case "1" -> generatedNumberSettings();
+            case "2" -> gameState.toggleAnswerUntilCorrect();
         }
     }
 

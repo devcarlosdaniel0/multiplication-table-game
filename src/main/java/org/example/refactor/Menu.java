@@ -22,6 +22,7 @@ public class Menu {
 
     public String showGeneralSettings() {
         System.out.println("1. Generated numbers settings");
+        System.out.printf("2. Toggle answer until correct (CURRENT: %s)%n", gameState.isAnswerUntilCorrect());
         System.out.print("> ");
 
         return scanner.nextLine();
