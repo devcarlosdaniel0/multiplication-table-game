@@ -5,11 +5,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class GameState {
-    private static boolean playing = true;
-    private static boolean randomRange = false;
-    private Set<Integer> randomRangeInterval = new TreeSet<>();
+    private boolean playing = true;
+    private boolean randomRange = false;
+    private boolean answerUntilCorrect = false;
+    private final Set<Integer> randomRangeInterval = new TreeSet<>();
     private int score = 0;
-    private Set<Integer> numbers = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    private final Set<Integer> numbers = new TreeSet<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
 
     public void stop() {
         playing = false;
@@ -20,7 +21,11 @@ public class GameState {
     }
 
     public void toggleRandomRange() {
-        this.randomRange = !randomRange;
+        randomRange = !randomRange;
+    }
+
+    public void toggleAnswerUntilCorrect() {
+        answerUntilCorrect = !answerUntilCorrect;
     }
 
     public boolean isPlaying() {
@@ -41,5 +46,9 @@ public class GameState {
 
     public Set<Integer> getRandomRangeInterval() {
         return randomRangeInterval;
+    }
+
+    public boolean isAnswerUntilCorrect() {
+        return answerUntilCorrect;
     }
 }

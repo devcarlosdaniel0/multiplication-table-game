@@ -10,9 +10,9 @@ public class GameService {
     private final GameState gameState;
     private final Menu menu;
 
-    public GameService() {
-        this.gameState = new GameState();
-        this.menu = new Menu();
+    public GameService(GameState gameState, Menu menu) {
+        this.gameState = gameState;
+        this.menu = menu;
     }
 
     public void play() {
@@ -104,7 +104,7 @@ public class GameService {
         }
 
         if (start >= end) {
-            System.out.println("Start cant be greater than end!");
+            System.out.println("Should insert interval in ascending order");
             return;
         }
 

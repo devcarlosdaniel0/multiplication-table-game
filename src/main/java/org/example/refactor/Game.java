@@ -7,8 +7,8 @@ public class Game {
 
     public Game() {
         this.gameState = new GameState();
-        this.menu = new Menu();
-        this.gameService = new GameService();
+        this.menu = new Menu(gameState);
+        this.gameService = new GameService(gameState, menu);
     }
 
     public void start() {

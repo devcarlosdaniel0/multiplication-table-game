@@ -7,8 +7,8 @@ public class Menu {
     private final Scanner scanner = new Scanner(System.in);
     private final GameState gameState;
 
-    public Menu() {
-        this.gameState = new GameState();
+    public Menu(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public String showInitial() {
@@ -32,7 +32,7 @@ public class Menu {
         System.out.println("2. Add number (one at time)");
         System.out.println("3. Remove number (one at time)");
         System.out.println("4. Choose custom numbers");
-        System.out.printf("5. Random range (CURRENT: %s)%n", gameState.isRandomRange());
+        System.out.printf("5. Toggle random range (CURRENT: %s)%n", gameState.isRandomRange());
         System.out.println("6. Check current numbers");
         System.out.print("> ");
 
