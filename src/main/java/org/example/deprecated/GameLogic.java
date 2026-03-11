@@ -9,7 +9,7 @@ public class GameLogic {
     private static boolean isPlaying = true;
     private static boolean isForceUntilCorrect = false;
     private static int score;
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("deprecated_messages", Locale.getDefault());
     private static String gameMode = "*";
     private static boolean isRandomRange = false;
     private static int[] randomRangeInterval;
