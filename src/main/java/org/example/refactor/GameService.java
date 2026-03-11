@@ -1,20 +1,17 @@
 package org.example.refactor;
 
 import org.example.refactor.enums.ChangeNumberOperation;
-import org.example.refactor.enums.MathOperation;
 
 import java.util.*;
 
 public class GameService {
     private final Scanner scanner;
-    private final Random random = new Random();
     private final GameState gameState;
-    private final Menu menu;
+    private final Random random = new Random();
 
-    public GameService(Scanner scanner, GameState gameState, Menu menu) {
+    public GameService(Scanner scanner, GameState gameState) {
         this.scanner = scanner;
         this.gameState = gameState;
-        this.menu = menu;
     }
 
     public void play() {
@@ -59,41 +56,7 @@ public class GameService {
         System.out.printf("Your actual score is: %d%n", gameState.getScore());
     }
 
-    public void generalSettings() {
-        String option = menu.showGeneralSettings();
-
-        switch (option) {
-            case "1" -> generatedNumberSettings();
-            case "2" -> gameState.toggleAnswerUntilCorrect();
-            case "3" -> changeGameOperation();
-        }
-    }
-
-    private void changeGameOperation() {
-        String option = menu.showGameOperation();
-
-        switch (option) {
-            case "1" -> gameState.setMathOperation(MathOperation.MULTIPLY);
-            case "2" -> gameState.setMathOperation(MathOperation.ADD);
-            case "3" -> gameState.setMathOperation(MathOperation.SUBTRACT);
-            case "4" -> gameState.setMathOperation(MathOperation.RANDOM);
-        }
-    }
-
-    private void generatedNumberSettings() {
-        String option = menu.showGeneratedNumbersSettings();
-
-        switch (option) {
-            case "1" -> numberPresets();
-            case "2" -> changeNumbers(ChangeNumberOperation.ADD);
-            case "3" -> changeNumbers(ChangeNumberOperation.REMOVE);
-            case "4" -> createCustomNumbers();
-            case "5" -> randomRange();
-            case "6" -> checkCurrentNumbers();
-        }
-    }
-
-    private void randomRange() {
+    public void randomRange() {
         if (gameState.isRandomRange()) {
             gameState.toggleRandomRange();
             System.out.println("Random range is now set to: " + gameState.isRandomRange());
@@ -139,7 +102,7 @@ public class GameService {
         System.out.println("Random range is now set to: " + gameState.isRandomRange());
     }
 
-    private void createCustomNumbers() {
+    public void createCustomNumbers() {
         System.out.println("""
                 Type the numbers you want to include
                 separated by spaces (ex: '2 6 10 15 30')
@@ -183,32 +146,7 @@ public class GameService {
         actualNumbers.addAll(customNumbers);
     }
 
-    private void numberPresets() {
-        String option = menu.showNumberPresets();
-
-        Set<Integer> numbers = gameState.getNumbers();
-
-        switch (option) {
-            case "1" -> {
-                numbers.clear();
-                numbers.addAll(Set.of(6, 7, 8, 9));
-            }
-            case "2" -> {
-                numbers.clear();
-                numbers.addAll(Set.of(3, 4, 6, 7, 8, 9));
-            }
-            case "3" -> {
-                numbers.clear();
-                numbers.addAll(Set.of(2, 3, 4, 5, 6, 7, 8, 9));
-            }
-            case "4" -> {
-                numbers.clear();
-                numbers.addAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-            }
-        }
-    }
-
-    private void changeNumbers(ChangeNumberOperation changeNumberOperation) {
+    public void changeNumbers(ChangeNumberOperation changeNumberOperation) {
         Set<Integer> actualNumbers = gameState.getNumbers();
 
         while (true) {
@@ -258,7 +196,7 @@ public class GameService {
         }
     }
 
-    private void checkCurrentNumbers() {
+    public void checkCurrentNumbers() {
         Set<Integer> numbers = gameState.getNumbers();
 
         System.out.println("Current numbers is: " + numbers);
