@@ -69,7 +69,7 @@ public class Menu {
             case "3" -> gameService.changeNumbers(ChangeNumberOperation.REMOVE);
             case "4" -> gameService.createCustomNumbers();
             case "5" -> gameService.randomRange();
-            case "6" -> gameService.checkCurrentNumbers();
+            case "6" -> gameService.checkActualNumbers();
         }
     }
 

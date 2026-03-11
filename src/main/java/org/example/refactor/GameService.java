@@ -8,6 +8,7 @@ public class GameService {
     private final Scanner scanner;
     private final GameState gameState;
     private final Random random = new Random();
+    private final ResourceBundle bundle = ResourceBundle.getBundle("text_content", Locale.getDefault());
 
     public GameService(Scanner scanner, GameState gameState) {
         this.scanner = scanner;
@@ -16,7 +17,7 @@ public class GameService {
 
     public void play() {
         if (gameState.getNumbers().isEmpty()) {
-            System.out.println("Game numbers should not be empty");
+            System.out.println(bundle.getString("game.numbers.empty"));
             return;
         }
 
@@ -39,11 +40,11 @@ public class GameService {
                 int userAnswer = Integer.parseInt(input);
 
                 if (userAnswer == correctAnswer) {
-                    System.out.println("Correct!");
+                    System.out.println(bundle.getString("game.correct"));
                     gameState.incrementScore();
                     correct = true;
                 } else {
-                    System.out.println("Wrong");
+                    System.out.println(bundle.getString("game.wrong"));
                     if (!gameState.isAnswerUntilCorrect()) {
                         break;
                     }
@@ -53,29 +54,28 @@ public class GameService {
     }
 
     public void viewScore() {
-        System.out.printf("Your actual score is: %d%n", gameState.getScore());
+        System.out.printf(bundle.getString("game.score"), gameState.getScore());
     }
 
     public void randomRange() {
         if (gameState.isRandomRange()) {
             gameState.toggleRandomRange();
-            System.out.println("Random range is now set to: " + gameState.isRandomRange());
+            System.out.printf(bundle.getString("random.range.toggle"), gameState.isRandomRange());
             return;
         }
 
-        System.out.println("Type the interval of numbers to be random generated separated by spaces, ex: '1 30' (1 to 30)");
-        System.out.print("> ");
+        System.out.print(bundle.getString("random.range.prompt"));
 
         String input = scanner.nextLine().trim();
         String[] interval = input.split("\\s+");
 
         if (interval.length != 2) {
-            System.out.println("Please insert 2 numbers, for the start and end of interval");
+            System.out.println(bundle.getString("random.range.invalid.length"));
             return;
         }
 
         if (!isInteger(interval[0]) || !isInteger(interval[1])) {
-            System.out.println("Must insert numbers!");
+            System.out.println(bundle.getString("random.range.invalid.number"));
             return;
         }
 
@@ -83,12 +83,12 @@ public class GameService {
         int end = Integer.parseInt(interval[1]);
 
         if (start <= 0 || end <= 0) {
-            System.out.println("Must be greater than 0");
+            System.out.println(bundle.getString("random.range.invalid.positive"));
             return;
         }
 
         if (start >= end) {
-            System.out.println("Should insert interval in ascending order");
+            System.out.println(bundle.getString("random.range.invalid.order"));
             return;
         }
 
@@ -99,21 +99,17 @@ public class GameService {
         randomRangeInterval.add(end);
 
         gameState.toggleRandomRange();
-        System.out.println("Random range is now set to: " + gameState.isRandomRange());
+        System.out.printf(bundle.getString("random.range.toggle"), gameState.isRandomRange());
     }
 
     public void createCustomNumbers() {
-        System.out.println("""
-                Type the numbers you want to include
-                separated by spaces (ex: '2 6 10 15 30')
-                Type 'done' when you finish.
-                """);
+        System.out.println(bundle.getString("custom.numbers.instructions"));
 
         Set<Integer> customNumbers = new TreeSet<>();
         Set<Integer> actualNumbers = gameState.getNumbers();
 
         while (true) {
-            System.out.print("Enter numbers or 'done' to finish: ");
+            System.out.print(bundle.getString("custom.numbers.prompt"));
             String userInput = scanner.nextLine().trim();
 
             if (userInput.equalsIgnoreCase("done")) {
@@ -126,19 +122,19 @@ public class GameService {
                 try {
                     int number = Integer.parseInt(userNumber.trim());
                     if (number <= 0) {
-                        System.out.println("Number must greater than 0");
+                        System.out.println(bundle.getString("custom.numbers.positive"));
                         break;
                     }
                     customNumbers.add(number);
                 } catch (NumberFormatException e) {
-                    System.out.println("Should insert numbers, not Strings");
+                    System.out.println(bundle.getString("custom.numbers.invalid"));
                     break;
                 }
             }
         }
 
         if (customNumbers.isEmpty()) {
-            System.out.println("Numbers cant be empty, previous was kept: " + actualNumbers);
+            System.out.println(bundle.getString("custom.numbers.empty") + actualNumbers);
             return;
         }
 
@@ -150,20 +146,20 @@ public class GameService {
         Set<Integer> actualNumbers = gameState.getNumbers();
 
         while (true) {
-            System.out.println("Actual numbers is: " + actualNumbers);
-            System.out.printf("Type the number to be %s: ", changeNumberOperation);
+            System.out.println(bundle.getString("numbers.actual") + actualNumbers);
+            System.out.printf(bundle.getString("numbers.prompt"), changeNumberOperation);
 
             String input = scanner.nextLine().trim();
 
             if (!isInteger(input)) {
-                System.out.println("Updated to: " + actualNumbers);
+                System.out.println(bundle.getString("numbers.updated") + actualNumbers);
                 return;
             }
 
             Integer number = Integer.parseInt(input);
 
             if (number <= 0) {
-                System.out.println("Number should be greater than 0");
+                System.out.println(bundle.getString("numbers.invalid.positive"));
                 break;
             }
 
@@ -196,9 +192,9 @@ public class GameService {
         }
     }
 
-    public void checkCurrentNumbers() {
+    public void checkActualNumbers() {
         Set<Integer> numbers = gameState.getNumbers();
 
-        System.out.println("Current numbers is: " + numbers);
+        System.out.println(bundle.getString("numbers.actual") + numbers);
     }
 }
