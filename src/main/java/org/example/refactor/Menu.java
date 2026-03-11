@@ -3,6 +3,8 @@ package org.example.refactor;
 import org.example.refactor.enums.ChangeNumberOperation;
 import org.example.refactor.enums.MathOperation;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -10,6 +12,7 @@ public class Menu {
     private final Scanner scanner;
     private final GameState gameState;
     private final GameService gameService;
+    private final ResourceBundle bundle = ResourceBundle.getBundle("text_content", Locale.getDefault());
 
     public Menu(Scanner scanner, GameState gameState, GameService gameService) {
         this.scanner = scanner;
@@ -18,10 +21,7 @@ public class Menu {
     }
 
     public String showInitial() {
-        System.out.println("1. Play");
-        System.out.println("2. General settings");
-        System.out.println("3. View score");
-        System.out.print("> ");
+        System.out.print(bundle.getString("menu.initial"));
 
         return scanner.nextLine();
     }
@@ -39,10 +39,7 @@ public class Menu {
     }
 
     public String showGeneralSettings() {
-        System.out.println("1. Generated numbers settings");
-        System.out.printf("2. Toggle answer until correct (CURRENT: %s)%n", gameState.isAnswerUntilCorrect());
-        System.out.println("3. Change math operations");
-        System.out.print("> ");
+        System.out.printf(bundle.getString("menu.generalSettings"), gameState.isAnswerUntilCorrect());
 
         return scanner.nextLine();
     }
@@ -58,13 +55,7 @@ public class Menu {
     }
 
     public String showGeneratedNumbersSettings() {
-        System.out.println("1. Presets");
-        System.out.println("2. Add number (one at time)");
-        System.out.println("3. Remove number (one at time)");
-        System.out.println("4. Choose custom numbers");
-        System.out.printf("5. Toggle random range (CURRENT: %s)%n", gameState.isRandomRange());
-        System.out.println("6. Check current numbers");
-        System.out.print("> ");
+        System.out.printf(bundle.getString("menu.generatedNumbers"), gameState.isRandomRange());
 
         return scanner.nextLine();
     }
@@ -83,11 +74,7 @@ public class Menu {
     }
 
     public String showGameOperation() {
-        System.out.println("1. Multiply");
-        System.out.println("2. Add");
-        System.out.println("3. Subtract");
-        System.out.println("4. Random");
-        System.out.print("> ");
+        System.out.print(bundle.getString("menu.operations"));
 
         return scanner.nextLine();
     }
@@ -104,11 +91,7 @@ public class Menu {
     }
 
     public String showNumberPresets() {
-        System.out.println("1. Include only [6, 7, 8, 9]");
-        System.out.println("2. Include only [3, 4, 6, 7, 8, 9]");
-        System.out.println("3. Include only [2, 3, 4, 5, 6, 7, 8, 9]");
-        System.out.println("4. Default [1 to 10]");
-        System.out.print("> ");
+        System.out.print(bundle.getString("menu.presets"));
 
         return scanner.nextLine();
     }
