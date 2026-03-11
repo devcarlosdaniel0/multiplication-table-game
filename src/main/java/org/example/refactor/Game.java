@@ -15,6 +15,8 @@ public class Game {
     }
 
     public void start() {
+        System.out.println("IF YOU WANT TO CANCEL AN OPERATION OR GO BACK TO MENU TYPE ANY LETTER");
+
         while (gameState.isPlaying()) {
             menu.initial();
         }
